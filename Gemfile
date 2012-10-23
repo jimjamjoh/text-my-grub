@@ -7,6 +7,7 @@ gem 'sqlite3'
 gem 'httparty'
 gem 'faraday_middleware', '0.8.8'
 gem 'twilio-ruby'
+gem 'hashie', '~> 1.2.0'
 
 group :test do
   gem 'rspec', '~> 2.11'
