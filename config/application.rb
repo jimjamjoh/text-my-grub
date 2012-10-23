@@ -59,6 +59,8 @@ module Sfrubytalkv2
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    config.autoload_paths += %W(#{config.root}/lib)
+
     config.yelp_v1_key = 'd_XXKKIHloR2ass48vjs6Q'
   end
 end
