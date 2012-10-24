@@ -7,7 +7,12 @@ class YelpService
     query_params = {ywsid: Sfrubytalkv2::Application.config.yelp_v1_key,
                     cuisine: CGI.escape(cuisine),
                     location: CGI.escape(location)}
-    HttpAbstraction.send_get(API_HOST, '/business_review_search', query_params)
+    raw_response = HttpAbstraction.send_get(API_HOST, '/business_review_search', query_params)
+    results = []
+    raw_response.businesses.each do |restaurant_info|
+      results << YelpRestaurantResult.new(restaurant_info)
+      break if results.size == limit
+    end
+    results
   end
-
 end

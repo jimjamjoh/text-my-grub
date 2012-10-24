@@ -5,7 +5,7 @@ class SmsResponse
   end
 
   def to_xml
-    "<Response><Sms>#{@response}</Sms></Response>"
+    "<Sms>#{@response}</Sms>"
   end
 
   def self.unrecognized_input
