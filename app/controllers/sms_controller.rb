@@ -4,7 +4,7 @@ class SmsController < ApplicationController
   def inbound
     cuisine, zip = parse_sms_query
     restaurants = YelpService.find_restaurants(cuisine, zip)
-    render :xml => xml_response(restaurants)
+    render :xml => xml_response(smsify(restaurants))
   end
 
   private
@@ -17,6 +17,12 @@ class SmsController < ApplicationController
 
   def handle_invalid_query
     render :xml => xml_response(SmsResponse.unrecognized_input)
+  end
+
+  def smsify(service_responses)
+    smses = []
+    service_responses.each {|service_response| smses << SmsResponse.new(service_response)}
+    smses
   end
 
   def xml_response(sms_responses)
