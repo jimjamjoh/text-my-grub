@@ -63,6 +63,6 @@ module Sfrubytalkv2
 
     config.yelp_v1_key = 'd_XXKKIHloR2ass48vjs6Q'
 
-    config.use_faraday = true
+    config.use_faraday = false
   end
 end
