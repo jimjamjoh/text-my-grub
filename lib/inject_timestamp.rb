@@ -1,6 +1,6 @@
 class InjectTimestamp < Faraday::Middleware
   def call(env)
-    env[:url].query += '&timestamp=timestamp'
+    env[:url].query += "&timestamp=#{CGI.escape(Time.now.to_s)}"
     @app.call(env)
   end
 end
