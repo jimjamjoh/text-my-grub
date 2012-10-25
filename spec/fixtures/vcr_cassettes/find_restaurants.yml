@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://api.yelp.com/business_review_search?location=75201&term=thai&ywsid=d_XXKKIHloR2ass48vjs6Q
+    uri: http://api.yelp.com/business_review_search?location=75201&term=thai&ywsid=your+yelp+key
     body:
       encoding: US-ASCII
       string: ''
