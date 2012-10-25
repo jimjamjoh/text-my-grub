@@ -10,8 +10,10 @@ class SmsController < ApplicationController
   private
 
   def parse_sms_query
-    cuisine, zip = params[:Body].split
-    raise InvalidSmsGrammarError.new if (cuisine.nil? || zip.nil?)
+    raw_params = params[:Body].split
+    raise InvalidSmsGrammarError.new unless raw_params.size >= 2
+    zip = raw_params.last
+    cuisine = raw_params[0..(raw_params.size - 2)].join(' ')
     return cuisine, zip
   end
 
