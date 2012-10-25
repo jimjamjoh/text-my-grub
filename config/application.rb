@@ -61,8 +61,8 @@ module Sfrubytalkv2
 
     config.autoload_paths += %W(#{config.root}/lib)
 
-    config.yelp_v1_key = 'd_XXKKIHloR2ass48vjs6Q'
+    config.yelp_v1_key = 'your yelp key'
 
-    config.use_faraday = false
+    config.use_faraday = true
   end
 end

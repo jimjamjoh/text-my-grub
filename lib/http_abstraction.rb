@@ -1,3 +1,6 @@
+require_relative 'raise_error'
+require_relative 'inject_timestamp'
+
 module HttpAbstraction
 
   def send_get(host, uri, params)
@@ -6,19 +9,20 @@ module HttpAbstraction
       get_with_httparty(host, uri, params)
   end
 
+  def get_with_httparty(host, uri, params)
+    HashiefiedParty.new(host + uri, cgi_escape(params)).get
+  end
+
   def get_with_faraday(host, uri, params)
     conn = Faraday.new(url: host) do |faraday|
+      faraday.response :raise_error_unless_success
       faraday.response :mashify
       faraday.response :json
+      faraday.request :inject_timestamp unless ($VCR_MODE == :playback || $VCR_MODE == :record)
       faraday.adapter  Faraday.default_adapter
     end
     response = conn.get(uri, cgi_escape(params))
     response.body
-  end
-
-  def get_with_httparty(host, uri, params)
-    response = HTTParty.get(host + uri, query: cgi_escape(params))
-    Hashie::Mash.new(JSON.parse(response))
   end
 
   def cgi_escape(params)
