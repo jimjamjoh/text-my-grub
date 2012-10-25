@@ -1,8 +1,8 @@
 class RaiseError < Faraday::Middleware
   def call(env)
-    response = @app.call env
-    response.on_complete do |env|
-      raise RuntimeError.new unless (200..299).include?(env[:status])
+    call = @app.call env
+    call.on_complete do |service_response|
+      raise RuntimeError.new unless (200..299).include?(service_response[:status])
     end
   end
 
