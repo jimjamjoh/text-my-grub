@@ -2,7 +2,7 @@ class SmsController < ApplicationController
   rescue_from InvalidSmsGrammarError, with: :handle_invalid_query
 
   def inbound
-    cuisine, zip = parse_twilio_inbound_message
+    cuisine, zip = parse_inbound_message
     restaurants = YelpService.find_restaurants(cuisine, zip)
     restaurants.each do |restaurant|
       restaurant.url = UrlShorteningService.shorten_url(restaurant.url)
@@ -12,7 +12,7 @@ class SmsController < ApplicationController
 
   private
 
-  def parse_twilio_inbound_message
+  def parse_inbound_message
     raw_params = params[:Body].split
     raise InvalidSmsGrammarError.new unless raw_params.size >= 2
     zip = raw_params.last

@@ -10,7 +10,7 @@ module HttpAbstraction
   end
 
   def get_with_httparty(host, uri, params)
-    HashiefiedParty.new(host + uri, cgi_escape(params)).get
+    HashiefiedParty.new(host + uri, uri_escape(params)).get
   end
 
   def get_with_faraday(host, uri, params)
@@ -21,13 +21,13 @@ module HttpAbstraction
       faraday.request :inject_timestamp unless ($VCR_MODE == :playback || $VCR_MODE == :record)
       faraday.adapter  Faraday.default_adapter
     end
-    response = conn.get(uri, cgi_escape(params))
+    response = conn.get(uri, uri_escape(params))
     response.body
   end
 
-  def cgi_escape(params)
+  def uri_escape(params)
     escaped_params = {}
-    params.each {|k, v| escaped_params.store(k, CGI.escape(v))}
+    params.each {|k, v| escaped_params.store(k, URI.escape(v))}
     escaped_params
   end
 end

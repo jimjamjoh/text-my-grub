@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.bit.ly/v3/shorten?apiKey=your%2520bitly%2520key&format=json&login=your%2520bitly%2520login&longUrl=http://someobscenelylongurlthatabsolutelyneedsshortening.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 29 Oct 2012 05:55:59 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Connection:
+      - keep-alive
+      Mime-Version:
+      - '1.0'
+      Content-Length:
+      - '227'
+    body:
+      encoding: US-ASCII
+      string: ! '{ "status_code": 200, "status_txt": "OK", "data": { "long_url": "http:\/\/someobscenelylongurlthatabsolutelyneedsshortening.com\/",
+        "url": "http:\/\/bit.ly\/SmDhM5", "hash": "SmDhM5", "global_hash": "SmDhM6",
+        "new_hash": 0 } }
+
+'
+    http_version: 
+  recorded_at: Mon, 29 Oct 2012 05:55:59 GMT
+recorded_with: VCR 2.2.5

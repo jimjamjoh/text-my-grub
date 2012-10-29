@@ -69,6 +69,9 @@ module Sfrubytalkv2
 
     config.yelp_v1_key = 'your yelp key'
 
+    config.bitly_login = 'your bitly login'
+    config.bitly_key = 'your bitly key'
+
     config.use_faraday = true
   end
 end

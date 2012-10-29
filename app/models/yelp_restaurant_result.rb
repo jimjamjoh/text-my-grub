@@ -5,8 +5,9 @@ class YelpRestaurantResult < Hashie::Dash
   property :url
 
   def to_s
-    stringification = "#{@name}\n#{@address}"
-    stringification += "\n#{@phone}" unless YelpRestaurantResult.empty?(@phone)
+    stringification = "#{self.name}\n#{self.address}"
+    stringification += "\n#{self.phone}" unless YelpRestaurantResult.empty?(self.phone)
+    stringification += "\n\n#{self.url}" unless YelpRestaurantResult.empty?(self.url)
     stringification
   end
 
