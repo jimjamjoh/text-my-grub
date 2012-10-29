@@ -4,7 +4,9 @@ class SmsController < ApplicationController
   def inbound
     cuisine, zip = parse_twilio_inbound_message
     restaurants = YelpService.find_restaurants(cuisine, zip)
-    #bitly for restaurants here
+    restaurants.each do |restaurant|
+      restaurant.url = UrlShorteningService.shorten_url(restaurant.url)
+    end
     render :xml => SmsResponder.respond(restaurants)
   end
 

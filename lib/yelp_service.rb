@@ -10,7 +10,7 @@ class YelpService
     raw_response = send_get(API_HOST, '/business_review_search', query_params)
     results = []
     raw_response.businesses.each do |restaurant_info|
-      results << YelpRestaurantResult.new(restaurant_info)
+      results << YelpRestaurantResult.from_service_response(restaurant_info)
       break if results.size == limit
     end
     results

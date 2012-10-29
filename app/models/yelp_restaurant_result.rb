@@ -1,27 +1,26 @@
-class YelpRestaurantResult
-  attr_reader :name, :address, :phone, :url
-
-  def initialize raw_yelp_info
-    parse_raw_info raw_yelp_info
-  end
+class YelpRestaurantResult < Hashie::Dash
+  property :name
+  property :address
+  property :phone
+  property :url
 
   def to_s
     stringification = "#{@name}\n#{@address}"
-    stringification += "\n#{@phone}" unless empty?(@phone)
+    stringification += "\n#{@phone}" unless YelpRestaurantResult.empty?(@phone)
     stringification
   end
 
-  private
-
-  def parse_raw_info raw_yelp_info
-    @name = raw_yelp_info.name
-    @address = raw_yelp_info.address1
-    @address += "\n#{raw_yelp_info.address2}" unless empty?(raw_yelp_info.address2)
-    @address += "\n#{raw_yelp_info.city} #{raw_yelp_info.state}"
-    @phone = raw_yelp_info.phone unless empty?(raw_yelp_info.phone)
+  def self.from_service_response raw_yelp_info
+    name = raw_yelp_info.name
+    address = raw_yelp_info.address1
+    address += "\n#{raw_yelp_info.address2}" unless empty?(raw_yelp_info.address2)
+    address += "\n#{raw_yelp_info.city} #{raw_yelp_info.state}"
+    phone = raw_yelp_info.phone unless empty?(raw_yelp_info.phone)
+    url = raw_yelp_info.url
+    YelpRestaurantResult.new(name: name, address: address, phone: phone, url: url)
   end
 
-  def empty?(value)
+  def self.empty?(value)
     return value.nil? || value.strip.size == 0
   end
 end
