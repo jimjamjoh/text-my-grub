@@ -4,7 +4,8 @@ class SmsController < ApplicationController
   def inbound
     cuisine, zip = parse_twilio_inbound_message
     restaurants = YelpService.find_restaurants(cuisine, zip)
-    render :xml => TwilioResponder.respond(restaurants)
+    #bitly for restaurants here
+    render :xml => SmsResponder.respond(restaurants)
   end
 
   private
@@ -19,7 +20,7 @@ class SmsController < ApplicationController
   end
 
   def handle_invalid_query
-    render :xml => TwilioResponder.respond_to_unrecognized_input
+    render :xml => SmsResponder.respond_to_unrecognized_input
   end
 
 end
