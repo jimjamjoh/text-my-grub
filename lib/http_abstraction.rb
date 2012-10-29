@@ -19,7 +19,7 @@ module HttpAbstraction
       faraday.response :mashify
       faraday.response :json
       faraday.request :inject_timestamp unless ($VCR_MODE == :playback || $VCR_MODE == :record)
-      faraday.adapter  Faraday.default_adapter
+      faraday.adapter :typhoeus
     end
     response = conn.get(uri, uri_escape(params))
     response.body
