@@ -1,5 +1,5 @@
 Sfrubytalkv2::Application.routes.draw do
-  post "sms/inbound" => 'sms#inbound'
+  match "sms/inbound" => 'sms#inbound', :via => [:get, :post]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

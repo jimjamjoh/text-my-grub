@@ -1,5 +1,6 @@
 class HashiefiedParty
   include HTTParty
+  format :json
 
   def initialize(url, params)
     @url = url
@@ -9,6 +10,6 @@ class HashiefiedParty
 
   def get
     response = self.class.get(@url, query: @params)
-    Hashie::Mash.new(JSON.parse(response))
+    Hashie::Mash.new(response)
   end
 end

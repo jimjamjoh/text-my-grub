@@ -72,6 +72,6 @@ module Sfrubytalkv2
     config.bitly_login = 'your bitly login'
     config.bitly_key = 'your bitly key'
 
-    config.use_faraday = true
+    config.use_faraday = false
   end
 end
